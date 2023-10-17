@@ -1,6 +1,8 @@
 package com.example.seen_back.business;
 
-import com.example.seen_back.business.dto.GeoJsonDto;
+import com.example.seen_back.business.dto.GeoJsonCollectionDto;
+import com.example.seen_back.business.dto.GeoJsonPointDto;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +14,14 @@ public class LocationController {
     private LocationsService locationsService;
 
     @PostMapping("/add")
-    public void addLocation(@RequestBody GeoJsonDto request) {
+    @Operation(summary = "Lisab andmebaasi ühe asukoha andmed.")
+    public void addLocation(@RequestBody GeoJsonPointDto request) {
         locationsService.addLocation(request);
     }
 
     @GetMapping("/get-all")
-    public GeoJsonDto getLocations() {
+    @Operation(summary = "Tagastab kõik andmebaasi salvestatud asukohad.")
+    public GeoJsonCollectionDto getLocations() {
         return locationsService.getLocations();
     }
 }

@@ -11,7 +11,7 @@ public class LocationService {
     @Resource
     private LocationRepository locationRepository;
 
-    public void addLocation(Location location) {
+    public void saveLocation(Location location) {
         locationRepository.save(location);
     }
 

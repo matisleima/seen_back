@@ -1,19 +1,14 @@
 package com.example.seen_back.business.dto;
 
+
 import lombok.Data;
 import java.util.List;
 
 @Data
-public class GeoJsonDto {
-    private String type = "FeatureCollection";
-    private List<Feature> features;
-
-    @Data
-    public static class Feature {
-        private String type = "Feature";
-        private Geometry geometry;
-        private Properties properties;
-    }
+public class GeoJsonPointDto {
+    private String type = "Feature";
+    private Geometry geometry;
+    private Properties properties;
 
     @Data
     public static class Geometry {
@@ -28,3 +23,4 @@ public class GeoJsonDto {
     }
 
 }
+

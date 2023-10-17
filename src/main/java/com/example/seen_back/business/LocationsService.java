@@ -1,6 +1,7 @@
 package com.example.seen_back.business;
 
-import com.example.seen_back.business.dto.GeoJsonDto;
+import com.example.seen_back.business.dto.GeoJsonCollectionDto;
+import com.example.seen_back.business.dto.GeoJsonPointDto;
 import com.example.seen_back.domain.Location;
 import com.example.seen_back.domain.LocationService;
 import jakarta.annotation.Resource;
@@ -16,12 +17,12 @@ public class LocationsService {
     @Resource
     private LocationMapper locationMapper;
 
-    public void addLocation(GeoJsonDto request) {
+    public void addLocation(GeoJsonPointDto request) {
         Location location = locationMapper.toEntity(request);
-        locationService.addLocation(location);
+        locationService.saveLocation(location);
     }
 
-    public GeoJsonDto getLocations() {
+    public GeoJsonCollectionDto getLocations() {
         List<Location> locations = locationService.getLocations();
         return locationMapper.toDto(locations);
     }
