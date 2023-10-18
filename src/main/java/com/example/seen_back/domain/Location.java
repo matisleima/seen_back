@@ -21,6 +21,11 @@ public class Location {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Size(max = 3)
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
+
     @NotNull
     @Column(name = "latitude", nullable = false)
     private Double latitude;

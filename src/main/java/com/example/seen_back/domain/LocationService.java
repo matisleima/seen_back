@@ -1,5 +1,6 @@
 package com.example.seen_back.domain;
 
+import com.example.seen_back.validation.Status;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,11 @@ public class LocationService {
         locationRepository.save(location);
     }
 
-    public List<Location> getLocations() {
-        return locationRepository.findAll();
+    public List<Location> getActiveLocations() {
+        return locationRepository.findLocationsBy(Status.ACTIVE.getLetter());
+    }
+
+    public Location getLocationBy(Integer id) {
+        return locationRepository.getLocationBy(id);
     }
 }

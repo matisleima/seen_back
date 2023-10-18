@@ -8,12 +8,14 @@ import org.mapstruct.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface LocationMapper {
 
     @Mapping(source = "description", target = "properties.description")
     @Mapping(expression = "java(java.util.List.of(location.getLongitude(), location.getLatitude()))", target = "geometry.coordinates")
     @Mapping(source = "id", target = "properties.id")
+    @Mapping(source = "status", target = "properties.status")
     GeoJsonCollectionDto.Feature toFeature(Location location);
 
     default GeoJsonCollectionDto toDto(List<Location> locations) {
@@ -28,18 +30,10 @@ public interface LocationMapper {
         return dto;
     }
 
-
     @Mapping(source = "properties.description", target = "description")
-    @Mapping(expression = "java(mapLongitudeFromFeatures(geoJsonPointDto))", target = "longitude")
-    @Mapping(expression = "java(mapLatitudeFromFeatures(geoJsonPointDto))", target = "latitude")
-    Location toEntity(GeoJsonPointDto geoJsonPointDto);
-
-//    default String mapDescriptionFromFeatures(GeoJsonCollectionDto request) {
-//        if (isValidFeature(request)) {
-//            return request.getFeatures().get(0).getProperties().getDescription();
-//        }
-//        return null;
-//    }
+    @Mapping(expression = "java(mapLongitudeFromFeatures(request))", target = "longitude")
+    @Mapping(expression = "java(mapLatitudeFromFeatures(request))", target = "latitude")
+    Location toEntity(GeoJsonPointDto request);
 
     default Double mapLongitudeFromFeatures(GeoJsonPointDto request) {
     if (isValidFeature(request) &&
@@ -64,5 +58,11 @@ public interface LocationMapper {
                 request.getProperties() != null &&
                 request.getGeometry() != null;
     }
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "properties.description", target = "description")
+    @Mapping(expression = "java(mapLongitudeFromFeatures(request))", target = "longitude")
+    @Mapping(expression = "java(mapLatitudeFromFeatures(request))", target = "latitude")
+    Location partialUpdate(GeoJsonPointDto request, @MappingTarget Location location);
 
 }

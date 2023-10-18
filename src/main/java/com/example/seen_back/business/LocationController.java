@@ -6,12 +6,17 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class LocationController {
 
     @Resource
     private LocationsService locationsService;
+
+    @GetMapping("/get-all")
+    @Operation(summary = "Tagastab kõik aktiivsed andmebaasi salvestatud asukohad.")
+    public GeoJsonCollectionDto getLocations() {
+        return locationsService.getLocations();
+    }
 
     @PostMapping("/add")
     @Operation(summary = "Lisab andmebaasi ühe asukoha andmed.")
@@ -19,9 +24,15 @@ public class LocationController {
         locationsService.addLocation(request);
     }
 
-    @GetMapping("/get-all")
-    @Operation(summary = "Tagastab kõik andmebaasi salvestatud asukohad.")
-    public GeoJsonCollectionDto getLocations() {
-        return locationsService.getLocations();
+    @PutMapping("/edit")
+    @Operation(summary = "Muudab ühe asukoha andmed.")
+    public void editLocation(@RequestBody GeoJsonPointDto request) {
+        locationsService.editLocation(request);
+    }
+
+    @DeleteMapping("/delete")
+    @Operation(summary = "Muudab ühe asukoha statuse mitteaktiivseks.")
+    public void deleteLocation(@RequestParam Integer id) {
+        locationsService.deleteLocation(id);
     }
 }

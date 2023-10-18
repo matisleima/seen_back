@@ -18,8 +18,9 @@ public class GeoJsonPointDto {
 
     @Data
     public static class Properties {
-        private Long id;
+        private Integer id;
         private String description;
+        private String status;
     }
 
 }
