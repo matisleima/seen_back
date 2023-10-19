@@ -8,7 +8,7 @@ is here to shamefully break that tradition.
 
 ## instructions
 The backend utilizes a PostgreSQL database and contains pre-existing 
-data for demo purposes. As of Oct 19 2023, integration with an H2 database is 
+data (via dedicated SQL scripts in the Database package) for demo purposes. As of Oct 19 2023, integration with an H2 database is 
 yet to come. 
 
 ### NB!
