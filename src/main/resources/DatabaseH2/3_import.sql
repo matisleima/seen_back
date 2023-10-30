@@ -5,4 +5,3 @@ INSERT INTO public.location (id, description, status, latitude, longitude) VALUE
 INSERT INTO public.location (id, description, status, latitude, longitude) VALUES (default, 'Tuumaseened', 'A', 25.841522184200585, 59.37239020676807);
 INSERT INTO public.location (id, description, status, latitude, longitude) VALUES (default, 'Gribõ', 'A', 28.219223006162796, 59.32968644439326);
 INSERT INTO public.location (id, description, status, latitude, longitude) VALUES (default, 'Lennukas seenekoht', 'A', 24.843902583816092, 59.413382377641234);
-INSERT INTO public.location (id, description, status, latitude, longitude) VALUES (default, 'Tindik', 'A', 26.815994381850036, 58.32505538211632);
